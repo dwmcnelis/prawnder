@@ -12,7 +12,7 @@ module Prawnder
         @pdf_stack ||= []
         @pdf_stack.push @pdf
         @pdf = prawn_object
-        self.instance_eval { partial_source(partial_name) }
+        instance_eval partial_source(partial_name)
         @pdf = @pdf_stack.pop
       end
 
@@ -20,17 +20,12 @@ module Prawnder
 
       def partial_source(partial_name)
         #TODO: implement some caching
-        file_path = get_file_path(partial_name)
-        puts "Prawnder: partial_source file_path #{file_path}"
-        File.open(file_path).read
+        File.open(get_file_path(partial_name)).read
       end
 
       def get_file_path(partial_name)
         partial_pathname = Pathname.new(partial_name)
-        partial_dirname = partial_pathname.dirname
-        partial_basename = partial_pathname.basename
-        file_path = Dir[File.join(Rails.root,"app/views/",partial_dirname,"_"+partial_basename.to_s+".{*.}prawn")].first
-        file_path
+        Dir[File.join(Rails.root,"app/views/",partial_pathname.dirname,"_"+partial_pathname.basename.to_s+".{*.}prawn")].first
       end
 
     end

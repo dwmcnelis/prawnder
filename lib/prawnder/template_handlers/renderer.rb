@@ -14,7 +14,7 @@ module Prawnder
 
       def to_pdf(scope = false, &block)
         @_scope = scope
-        self.instance_eval(&block)
+        instance_eval(&block)
         @pdf.render.html_safe
       end
 
