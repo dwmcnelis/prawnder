@@ -83,7 +83,13 @@ module Prawnder
         vars.each { |name| object.instance_variable_set(name, instance_variable_get(name)) }
       end
 
-      # This method is a little hacky with pushing the instance variables back. I would prefer to use bindings, but wasn't having much luck.
+      def set_locals(locals,exclude = [])
+        if locals
+          @locals = (locals.to_a - exclude.map(&:to_sym)).inject({}) {|h,(k,v)| h[k]=v; h}
+        end
+      end
+
+        # This method is a little hacky with pushing the instance variables back. I would prefer to use bindings, but wasn't having much luck.
       def method_missing(m, *args, &block)
         begin
           super
@@ -99,6 +105,9 @@ module Prawnder
             push_instance_variables_to @view_context
             res = @view_context.send(m, *args, &block)
             copy_instance_variables_from @view_context
+            res
+          elsif @locals[m]
+            res = @locals[m]
             res
           else
             raise
