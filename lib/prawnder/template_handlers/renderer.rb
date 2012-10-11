@@ -80,33 +80,34 @@ module Prawnder
 
       # Dynamic methods for access to @pdf,@calling_object,@view_context, and @locals
       def method_missing(method, *args, &block)
+        fill_stroke_pattern = /^fill_and_stroke_|^fill_|^stroke_/
         begin
           super
         rescue
-          if @pdf.respond_to?(method.to_s)
+          if !@pdf.nil? &&  @pdf.respond_to?(method.to_s)
             # dynamic method for @pdf method
             @pdf.send(method, *args, &block)
-          elsif method.to_s.match(/^fill_|^stroke_/) &&  @pdf.respond_to?(method.to_s.gsub(/^fill_|^stroke_/,''))
+          elsif method.to_s.match(fill_stroke_pattern) &&  !@pdf.nil? &&  @pdf.respond_to?(method.to_s.gsub(fill_stroke_pattern,''))
             # dynamic method for @pdf fill_* or stroke_* dynamic method
             @pdf.send(method, *args, &block)
-          elsif @calling_object.respond_to?(method.to_s)
+          elsif !@calling_object.nil? &&  @calling_object.respond_to?(method.to_s)
             # dynamic method for @calling_object method
             push_instance_variables_to @calling_object
             res = @calling_object.send(method, *args, &block)
             copy_instance_variables_from @calling_object
             res
-          elsif @calling_object != @view_context and @view_context.respond_to?(method.to_s)
+          elsif !@calling_object.nil? &&  !@view_context.nil? &&  @calling_object != @view_context and @view_context.respond_to?(method.to_s)
             # dynamic method for @view_context method
             push_instance_variables_to @view_context
             res = @view_context.send(method, *args, &block)
             copy_instance_variables_from @view_context
             res
-          elsif @locals[method]
+          elsif !@locals.nil? && @locals[method]
             # dynamic method for locals
             res = @locals[method]
             res
           else
-            raise RenderError, "method missing '#{method}'"
+            raise RenderError, "method missing '#{method.to_s}'"
           end
         end
       end
