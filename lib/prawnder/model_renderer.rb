@@ -1,3 +1,4 @@
+
 module Prawnder
   module ModelRenderer
 
@@ -9,6 +10,8 @@ module Prawnder
         self.params = {:format => :pdf}
       end
     end
+
+    #--------------------------------------------------------------------------------------------------#
 
     # template : invoices/show.pdf
     # instance_variables : {"@account" => account} - variables set in before filters

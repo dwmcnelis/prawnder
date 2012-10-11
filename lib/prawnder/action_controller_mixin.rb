@@ -1,6 +1,9 @@
+
 module Prawnder
   module ActionControllerMixin
     DEFAULT_PRAWN_PDF_OPTIONS = {:inline=>true}
+
+    #--------------------------------------------------------------------------------------------------#
 
     def self.included(base)
       base.send :attr_reader, :prawnder_options
@@ -9,6 +12,8 @@ module Prawnder
       base.prawnder_hash = {}
       base.extend ClassMethods
     end
+
+    #--------------------------------------------------------------------------------------------------#
 
     module ClassMethods
 
@@ -19,7 +24,9 @@ module Prawnder
         self.prawnder_hash = DEFAULT_PRAWN_PDF_OPTIONS.dup.merge(prawnder_options)
       end
 
-    private
+      #--------------------------------------------------------------------------------------------------#
+
+      private
 
       # splits the :prawn key out into a seperate hash
       def breakdown_prawnder_options(options)
@@ -28,6 +35,8 @@ module Prawnder
         [prawn_options, prawnder_options]
       end
     end
+
+    #--------------------------------------------------------------------------------------------------#
 
     # Sets the prawn options. Use in the controller method.
     #
@@ -39,7 +48,9 @@ module Prawnder
       @prawnder_options.merge! options
     end
 
-  private
+    #--------------------------------------------------------------------------------------------------#
+
+    private
 
     # this merges the default prawnder options, the controller prawnder options, and the instance prawnder options, and the splits out then joins in the :prawn options.
     # This is called when setting the header information just before render.
