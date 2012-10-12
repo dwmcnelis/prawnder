@@ -2,6 +2,8 @@
 require 'prawnder/version'
 require 'prawnder/railtie' if defined?(Rails)
 
+# (adapted from prawnto_2 by Forrest Zeisler, OctopusApp Inc.)
+# (adapted from prawnto by prior, cracklabs.com.)
 module Prawnder
 
   autoload :ActionControllerMixin, 'prawnder/action_controller_mixin'
