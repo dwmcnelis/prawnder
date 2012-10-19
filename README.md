@@ -1,6 +1,10 @@
-# PrawnPdf
+# Prawnder
 
-Rails prawn pdf renderer support
+Rails Prawn PDF renderer support compatible with Rails 3.
+
+* Adds view templates with direct Prawn document methods.
+* Allows for nested partials
+* Supports passing locals to partials
 
 ## Installation
 

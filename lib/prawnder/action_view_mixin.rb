@@ -1,7 +1,8 @@
+
 module Prawnder
   module ActionViewMixin
 
-  private
+    private
 
     def _prawnder_compile_setup
       compile_support = CompileSupport.new(controller)

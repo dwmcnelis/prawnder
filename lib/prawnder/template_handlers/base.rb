@@ -1,3 +1,4 @@
+
 require "prawn"
 
 module Prawnder
@@ -7,11 +8,13 @@ module Prawnder
         check_for_pdf_redefine(template.source)
 
         "_prawnder_compile_setup;" +
-        "renderer = Prawnder::TemplateHandlers::Renderer.new(self);"+
-        "renderer.to_pdf(self) do; #{template.source}\nend;"
+            "renderer = Prawnder::TemplateHandlers::Renderer.new(self);"+
+            "renderer.to_pdf(self) do; #{template.source}\nend;"
       end
 
-    private
+      #--------------------------------------------------------------------------------------------------#
+
+      private
 
       def self.check_for_pdf_redefine(template_source)
         if template_source =~ /pdf\s*=[^=]/

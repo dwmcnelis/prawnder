@@ -1,3 +1,4 @@
+
 module Prawnder
   class Railtie < Rails::Railtie
 
@@ -11,6 +12,8 @@ module Prawnder
         ActionView::Template.register_template_handler :prawn_dsl, Prawnder::TemplateHandlers::Base # for legacy systems
       end
     end
+
+    #--------------------------------------------------------------------------------------------------#
 
     # This will run it once in production and before each load in development.
     # Include the mixins for ActionController and ActionView.

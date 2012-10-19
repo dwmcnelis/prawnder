@@ -4,8 +4,16 @@ require File.expand_path('../lib/prawnder/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Dave McNelis"]
   gem.email         = ["davemcnelis@market76.com"]
-  gem.description   = %q{Rails prawn pdf renderer support}
-  gem.summary       = %q{Rails prawn pdf renderer support}
+  gem.description   = %q{
+Rails Prawn PDF renderer support compatible with Rails 3.
+
+* Adds view templates with direct Prawn document methods.
+* Allows for nested partials
+* Supports passing locals to partials
+}
+  gem.summary       = %q{
+Rails Prawn PDF renderer support compatible with Rails 3.
+}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
