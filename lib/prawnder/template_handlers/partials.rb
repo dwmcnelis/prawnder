@@ -40,7 +40,7 @@ module Prawnder
         @pdf_stack ||= []
         @pdf_stack.push @pdf
         @pdf = prawn
-        instance_eval partial_source(partial)
+        instance_eval(partial_source(partial), __FILE__, __LINE__)
         @pdf = @pdf_stack.pop
         @locals = @locals_stack.pop
       end
