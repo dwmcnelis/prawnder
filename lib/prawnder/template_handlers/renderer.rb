@@ -102,7 +102,7 @@ module Prawnder
             res = @view_context.send(method, *args, &block)
             copy_instance_variables_from @view_context
             res
-          elsif !@locals.nil? && @locals[method]
+          elsif !@locals.nil? && @locals.include?(method)
             # dynamic method for locals
             res = @locals[method]
             res
