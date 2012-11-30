@@ -67,7 +67,7 @@ module Prawnder
         scale_width = (to_width.to_f)/(image_width.to_f)
         scale_height = (to_height.to_f)/(image_height.to_f)
         scale =  scale_width <  scale_height ? scale_width : scale_height
-        x =  (to_width.to_f-(scale*image_width.to_f))/2.0
+        x =  0
         y =  (to_height.to_f-(scale*image_height.to_f))/2.0
         {scale: scale,at: [x,y]}
       end
