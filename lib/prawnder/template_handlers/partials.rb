@@ -57,10 +57,17 @@ module Prawnder
       #--------------------------------------------------------------------------------------------------#
 
       def get_file_path(partial_name)
-        partial_pathname = Pathname.new(partial_name)
-        Dir[File.join(Rails.root,"app/views/",partial_pathname.dirname,"_"+partial_pathname.basename.to_s+".{*.}prawn")].first
+        found = nil
+        pathname = Pathname.new(partial_name)
+        dirname = pathname.dirname.to_s
+        basename = pathname.basename.to_s
+        view_paths.each do |path|
+          pattern = File.join(path,dirname,"_#{basename}.{*.}prawn")
+          found = Dir.glob(pattern).first
+          break if found
+        end
+        found
       end
-
     end
   end
 end
